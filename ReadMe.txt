@@ -1,0 +1,1 @@
+Practise in unsupersived learning (clustering). Implement k-means and DBSCAN clustering algorithm using Python. The technical report has been formed using Jupyter notebook. 
