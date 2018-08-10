@@ -32,7 +32,7 @@ for i=1:c
     for k=1:c
         sumd=sumd+((x-v(i))./(x-v(k))).^2;  
     end
-    u(i,:)=1./sumd;    % membership function for each pixel
+    u(i,:)=1./sumd;    
 end
 
 h=zeros(c,m*n);
@@ -41,23 +41,23 @@ h=zeros(c,m*n);
      for i=1:m*n
          xpos=fix(i/n)+1;
          ypos=mod(i,n);
-         if xpos>2 && ypos>2 && n-xpos>2 && m-ypos>2
+         if xpos>2 && ypos>2 && n-xpos>2 && m-ypos>2  
             sumh=0;
-            for j=ypos-2:ypos+2
+            for j=ypos-2:ypos+2                       % Local image window (5*5) to get a spatial function 
                 for k=xpos-2:xpos+2
                     sumh=sumh+u(cen,(j-1)*n+k);    
                 end
             end
             h(cen,i)=sumh;
          else
-         h(cen,i)=u(cen,i);
+         h(cen,i)=u(cen,i); 
          end
      end
  end
  
  minJ=+inf;
  cot=0;
- u2=(u.^p).*(h.^q);
+ u2=(u.^p).*(h.^q);     % Spatial function is incorporated into membership function
  
 wait=waitbar(0,'Calucating, Please wait...');
 
@@ -83,7 +83,7 @@ wait=waitbar(0,'Calucating, Please wait...');
                 sumh=0;
                 for j=ypos-2:ypos+2
                     for k=xpos-2:xpos+2
-                        sumh=sumh+u(cen,(j-1)*n+k);       % the spatial information
+                        sumh=sumh+u(cen,(j-1)*n+k);      
                     end
                 end
                 h(cen,i)=sumh;
